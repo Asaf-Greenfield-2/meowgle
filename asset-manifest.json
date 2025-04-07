@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/meowgle/static/css/main.5af16122.css",
+    "main.js": "/meowgle/static/js/main.41e93811.js",
+    "static/js/453.41dfd5e8.chunk.js": "/meowgle/static/js/453.41dfd5e8.chunk.js",
+    "index.html": "/meowgle/index.html",
+    "main.5af16122.css.map": "/meowgle/static/css/main.5af16122.css.map",
+    "main.41e93811.js.map": "/meowgle/static/js/main.41e93811.js.map",
+    "453.41dfd5e8.chunk.js.map": "/meowgle/static/js/453.41dfd5e8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5af16122.css",
+    "static/js/main.41e93811.js"
+  ]
+}
