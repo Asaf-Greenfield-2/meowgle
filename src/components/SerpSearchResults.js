@@ -4,47 +4,51 @@ import axios from 'axios';
 const SerpSearchResults = ({ query }) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const API_KEY = '027c4fee338f2a6424890d1b8dfbccd303fccaa69a99a8953dfd0b6f9c9e7d2a';
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!query) return;
-    setLoading(true);
 
-    axios.get('https://serpapi.com/search.json', {
-      params: {
-        q: query,
-        engine: 'google',
-        api_key: API_KEY
-      }
-    })
+    setLoading(true);
+    setError(null);
+
+    axios.get('http://localhost:5050/api/search', {
+        params: { q: query }
+      })
     .then(res => {
-        console.log('🔎 Full SerpAPI response:', res.data); // ← log it to inspect
-      
-        if (res.data && res.data.organic_results && res.data.organic_results.length > 0) {
-          setResults(res.data.organic_results);
-        } else {
-          setResults([]); // empty results or missing data
-        }
-      })
-      .catch(err => {
-        console.error('SerpAPI error:', err);
-      })
-      .finally(() => setLoading(false));
+      const organicResults = res.data.organic_results || [];
+      console.log("✅ Organic Results:", organicResults);
+      setResults(organicResults);
+    })
+    .catch(err => {
+      console.error('❌ Server error:', err);
+      setError('Failed to fetch results. Try again later.');
+    })
+    .finally(() => {
+      setLoading(false);
+    });
   }, [query]);
 
   return (
     <div className="results">
       {loading && <p>Searching the web for furry knowledge... 🐾</p>}
-      {!loading && results.length === 0 && query && (
+      {error && <p>{error}</p>}
+      {!loading && !error && results.length === 0 && (
         <p>No results found for “{query}” 😿</p>
       )}
-      {results.map((result, index) => (
+      {!loading && !error && results.map((result, index) => (
         <div key={index} className="result-card">
           <a href={result.link} target="_blank" rel="noopener noreferrer">
+            {result.thumbnail && (
+              <img
+                src={result.thumbnail}
+                alt={result.title}
+                style={{ width: '100%', borderRadius: '8px', marginBottom: '0.5rem' }}
+              />
+            )}
             <h3>{result.title}</h3>
+            <p>{result.snippet}</p>
           </a>
-          <p>{result.snippet}</p>
         </div>
       ))}
     </div>
