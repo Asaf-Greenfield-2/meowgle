@@ -4,7 +4,7 @@ html, body {
     padding: 0;
     height: 100%;
     overflow: hidden; /* 👈 disables scroll */
-    background-color: #fffbe9;
+    background-color: lightblue;
   }
   
   
