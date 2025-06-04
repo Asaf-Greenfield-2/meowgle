@@ -1,0 +1,32 @@
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo {
+  font-size: 4rem;
+  color: grey;
+  margin-bottom: 2rem;
+}
+
+.logo span {
+  display: inline-block;
+  animation: wave 1.5s infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.landing-form input {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
