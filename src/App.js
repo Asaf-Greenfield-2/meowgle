@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import SerpSearchResults from './components/SerpSearchResults';
+import LandingPage from './components/LandingPage';
 
 const trendingSearches = [
   'Chonky cats',
@@ -19,6 +20,12 @@ function App() {
   const [query, setQuery] = useState('');
   const [submittedQuery, setSubmittedQuery] = useState('');
   const [suggestionsVisible, setSuggestionsVisible] = useState(false);
+  const [showLanding, setShowLanding] = useState(true);
+
+  const handleLandingComplete = () => {
+    setShowLanding(false);
+    setSubmittedQuery('kitties');
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +45,10 @@ function App() {
           t.toLowerCase().includes(query.toLowerCase()))
       : trendingSearches;
   };
+
+  if (showLanding) {
+    return <LandingPage onComplete={handleLandingComplete} />;
+  }
 
   return (
     <div className="App">
